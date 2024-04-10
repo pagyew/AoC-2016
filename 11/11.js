@@ -105,8 +105,7 @@ for (let part2 of [false, true]) {
 
   while (stack.size) {
     const [index, count, matrix] = stack.pop()
-    const str = JSON.stringify(matrix)
-    const hash = [index, str].join()
+    const hash = [index, matrix].join()
 
     if (matrix[3] === expected) {
       ans = Math.min(ans, count)
@@ -122,7 +121,7 @@ for (let part2 of [false, true]) {
       for (let i = 0; i < len; i++) {
         if (!getBit(matrix[index], i)) continue
 
-        const copy1 = JSON.parse(str)
+        const copy1 = [...matrix]
 
         copy1[index] = clearBit(copy1[index], i)
         copy1[nextIndex] = setBit(copy1[nextIndex], i)
@@ -134,7 +133,7 @@ for (let part2 of [false, true]) {
         for (let j = i + 1; j < len; j++) {
           if (!getBit(matrix[index], j)) continue
 
-          const copy2 = JSON.parse(JSON.stringify(copy1))
+          const copy2 = [...copy1]
 
           copy2[index] = clearBit(copy2[index], j)
           copy2[nextIndex] = setBit(copy2[nextIndex], j)
